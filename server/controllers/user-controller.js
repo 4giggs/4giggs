@@ -1,22 +1,33 @@
 const db = require('../db/index.js');
 
+const bcrypt = require('bcrypt');
+const saltRounds = 7;
+
 const userController = {};
 
 userController.create = function(req, res, next) {
-  queryText = `
-    INSERT INTO
-      users (name, hashedPW, email)
-      VALUES ($1, $2, $3)
-  `
 
-  params = [req.body.name, JSON.stringify(req.body.hashedPW), JSON.stringify(req.body.email)];
+  //bcrypt
+  bcrypt.hash(req.body.password, saltRounds, function(err, hashedPW) {
+    // Store hash in your password DB.
+    if (err) next({log: 'Error in userController.create: ' + err.message});
+  
+    queryText = `
+      INSERT INTO
+        users (name, hashedPW, email)
+        VALUES ($1, $2, $3)
+    `
 
-  db.query(queryText, params, (err, res) => {
-    if (err) {
-      next({log: 'Error in userController.create: ' + err.message});
-    } else {
-      next();
-    };
+    params = [req.body.name, JSON.stringify(hashedPW), JSON.stringify(req.body.email)];
+
+    db.query(queryText, params, (err, res) => {
+      if (err) {
+        next({log: 'Error in userController.create: ' + err.message});
+      } else {
+        console.log(res);
+        next();
+      };
+    });
   });
 };
 

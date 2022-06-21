@@ -40,6 +40,20 @@ app.use('/interview', interview);
 const session = require('./routes/session');
 app.use('/login', session);
 
+// Global Error Handler
+app.use((err, req, res, next) => {
+  defaultError = {
+    log: 'An unkown Error Occured in React MiddleWare',
+    message: 'An error occurred'
+  }
+
+  defaultError = {
+    ...defaultError,
+    log: err.log
+  }
+  console.log(defaultError.log);
+  res.status(400).send(defaultError.message)
+});
 
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`)

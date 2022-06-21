@@ -2,6 +2,8 @@ const express = require('express')
 const job = express.Router()
 
 // Create
+// Try to associate user with the job, Michael building helper function to test if someone is logged in
+// 
 job.post('/', (req, res) => {
   res.json('job Created')
 })
@@ -13,7 +15,7 @@ job.get('/:jobId', (req, res) => {
 
 // Update
 job.patch('/:jobId', (req, res) => {
-  res.json(`job ${req.param.jobId} Updated`)
+  res.json(`job ${req.params.jobId} Updated`)
 })
 
 // Destroy

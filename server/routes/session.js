@@ -1,30 +1,20 @@
 const express = require('express');
 const { nextTick } = require('process');
-const session = express.Router()
+const session = express.Router();
+const sessionController = require('../controllers/session-controller');
 
 //Mock UserDB
-const users = {
-  'mteifel': {
-    id: 1,
-    email: 'teifel7@gmail.com',
-    password: 'password123'
-  }
-}
-// Create
-session.post('/', (req, res) => {
-  const{user, password} = req.body;
-  const resObj = {
-    message: 'Error: User not authenticated',
-    data: {}
-  };
+// const users = {
+//   'mteifel': {
+//     id: 1,
+//     email: 'teifel7@gmail.com',
+//     password: 'password123'
+//   }
+// };
 
-  if(users[user].password === password) {
-    req.session.regenerate(() => {
-      req.session.userId = users[user].id;
-      resObj.message = 'Success: User logged in';
-      res.json(resObj);
-    });
-  }
+// Create
+session.post('/', sessionController.create, (req, res) => {
+  res.json('Session Created');
   // try {
   //   if(users[user].password === password) {
   //     req.session.regenerate(() => {
@@ -42,9 +32,7 @@ session.post('/', (req, res) => {
 session.delete('/', (req, res) => {
   req.session.destroy((err) => {
     if(!err) res.json(`session ${req.params.sessionId} Destroyed`);
-    
-  })
-  
-})
+  });
+});
 
 module.exports = session;
