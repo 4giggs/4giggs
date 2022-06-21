@@ -1,37 +1,7 @@
-const express = require('express')
-const app = express()
-const port = 3000
-const expressSession = require('express-session');
+import React from 'react';
+import App from './components/App';
+import { createRoot } from 'react-dom/client';
 
-/**
- * Middleware
- */
-app.use(expressSession({
-  cookie: {maxAge: 180 * 24 * 60 * 60}
-}))
+const root = createRoot(document.getElementById('app'));
 
-
-/**
- * Routes
- */
-
-// User
-const user = require('./routes/user');
-app.use('/user', user);
-
-// Job
-const job = require('./routes/job');
-app.use('/job', job);
-
-// Interview
-const interview = require('./routes/interview');
-app.use('/interview', interview);
-
-// Session
-const session = require('./routes/session');
-app.use('/login', session);
-
-
-app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+root.render(<App />);
