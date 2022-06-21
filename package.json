@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/4giggs/4giggs/issues"
   },
-  "homepage": "https://github.com/4giggs/4giggs#readme"
+  "homepage": "https://github.com/4giggs/4giggs#readme",
+  "dependencies": {
+    "node-postgres": "^0.6.2"
+  }
 }
