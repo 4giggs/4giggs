@@ -12,5 +12,6 @@ module.exports = {
     executedAt = Date.now();
     console.log('Executed query ~ ', {executedAt, text});
     return pool.query(text, params, callback);
-  }
+  },
+  pool
 };

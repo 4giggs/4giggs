@@ -7,7 +7,7 @@ const queryText = `
     _id SERIAL,
     name text NOT NULL,
     hashedPW bytea NOT NULL,
-    email text NOT NULL,
+    email text NOT NULL
   );
 
   CREATE TABLE jobs (
@@ -16,8 +16,7 @@ const queryText = `
     title text NOT NULL,
     stage text NOT NULL,
     link text NOT NULL,
-    _created_at timestamptz DEFAULT current_timestamp,
-    _last_modified_at timestamptz DEFAULT  
+    _created_at timestamptz DEFAULT current_timestamp
   );
 `;
 
