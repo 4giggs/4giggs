@@ -37,7 +37,7 @@ userController.read = function(req, res, next) {
 
   db.query(queryText, params, (err, queryResult) => {
     if (err) {
-      next({log: "Error in userController.read: " + err.message})
+      next({log: "Error in userController.read: " + err.message});
     } else {
       res.locals.users = queryResult.rows;
       next();

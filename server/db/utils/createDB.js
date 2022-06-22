@@ -18,10 +18,11 @@ const queryText = `
     link text NOT NULL,
     _created_at timestamptz DEFAULT current_timestamp
   );
+
+  CREATE TABLE session
 `;
 
 const queryParams = [];
-
 
 db.query(queryText, queryParams, (err, res) => {
   if (err) {
