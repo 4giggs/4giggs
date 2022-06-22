@@ -3,6 +3,7 @@ const app = express()
 const port = 3000
 const expressSession = require('express-session');
 const db = require('./db/index.js');
+
 /**
  * Middleware
  */
