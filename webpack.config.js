@@ -26,15 +26,15 @@ module.exports = {
           },
         },
       },
-      //   {
-      //     test: /\.css$/i,
-      //     use: ['style-loader', 'css-loader'],
-      //   },
-      {
-        test: /\.s(c|a)ss$/,
-        exclude: /node_modules/,
-        use: ['style-loader', 'css-loader', 'sass-loader'],
-      },
+        {
+          test: /\.css$/i,
+          use: ['style-loader', 'css-loader'],
+        },
+    //   {
+    //     test: /\.s[ac]ss$/i /*/\.s(c|a)ss$/*/ ,
+    //     exclude: /node_modules/,
+    //     use: ['style-loader', 'css-loader', 'sass-loader'],
+    //   },
       {
         test: /\.(png|jp(e*)g|svg|gif)$/,
         use: [
