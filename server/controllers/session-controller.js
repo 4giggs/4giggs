@@ -29,7 +29,8 @@ sessionController.create = function(req, res, next) {
       next({log: 'Error in sessionController.create: ' + err.message});
     } else {
       // Use Bcrypt Compare to check if hashedPassword matches submited password
-      bcrypt.compare(password, queryResult.rows[0].hashedPW, function(err, result) {
+      const hashedPW = queryResult.rows[0].hashedpw.toString();
+      bcrypt.compare(password, hashedPW, function(err, result) {
         if(err) {
           res.json(errorObj);
         } else {
