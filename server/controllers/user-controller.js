@@ -18,7 +18,7 @@ userController.create = function(req, res, next) {
         VALUES ($1, $2, $3)
     `
 
-    params = [req.body.name, JSON.stringify(hashedPW), JSON.stringify(req.body.email)];
+    params = [req.body.name, hashedPW, req.body.email];
 
     db.query(queryText, params, (err, res) => {
       if (err) {
