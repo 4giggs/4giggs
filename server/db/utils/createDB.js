@@ -2,7 +2,6 @@ const db = require('../index.js');
 
 const queryText = `
   DROP TABLE IF EXISTS users;
-
   CREATE TABLE users (
     _id SERIAL,
     name text NOT NULL,
@@ -10,18 +9,20 @@ const queryText = `
     email text NOT NULL
   );
 
+  DROP TABLE IF EXISTS jobs;
   CREATE TABLE jobs (
     _id SERIAL,
     company text NOT NULL,
     title text NOT NULL,
     stage text NOT NULL,
     link text NOT NULL,
-    _created_at timestamptz DEFAULT current_timestamp
+    _created_at timestamptz DEFAULT current_timestamp,
+    user_id integer NOT NULL REFERENCES users(_id)
   );
 
-  CREATE TABLE session
+  DROP TALBE IF EXISTS sessions;
 `;
-
+// sessions table in PSQL gets auto created by express' sessions package
 const queryParams = [];
 
 db.query(queryText, queryParams, (err, res) => {

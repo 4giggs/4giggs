@@ -5,7 +5,7 @@ const jobController = {};
 jobController.create = function(req, res, next) {
   const queryText = `
     INSERT INTO
-    jobs (company, title, stage, link, _created_at)
+    jobs (company, title, stage, link, _created_at, user_id)
     VALUES ($1, $2, $3, $4, $5)
   `
   params = [
@@ -13,14 +13,15 @@ jobController.create = function(req, res, next) {
     req.body.title, 
     req.body.stage, 
     JSON.stringify(req.body.link), 
-    req.body._created_at
+    req.body._created_at,
+    req.session.userId
   ];
 
   db.query(queryText, params, (err, res) => {
     if (err) {
-      next({log: 'Error in jobController.create: '+err.message});
+      return next({log: 'Error in jobController.create: ' + err.message});
     } else {
-      console.log()
+      return next();
     }
   });
 };
