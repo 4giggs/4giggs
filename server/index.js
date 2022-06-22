@@ -28,6 +28,10 @@ app.use(express.json());
 const user = require('./routes/user');
 app.use('/user', user);
 
+// Users Jobs
+const usersJobs = require('./routes/users-jobs');
+app.use('/users-jobs', usersJobs);
+
 // Job
 const job = require('./routes/job');
 app.use('/job', job);
