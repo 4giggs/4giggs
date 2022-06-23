@@ -1,23 +1,32 @@
-const express = require('express')
-const app = express()
-const port = 3000
+const express = require('express');
+const app = express();
+const port = 3000;
 const expressSession = require('express-session');
 const db = require('./db/index.js');
+var cors = require('cors');
+app.use(
+  cors({
+    origin: ['http://localhost:3000', 'http://localhost:8080'],
+    credentials: true,
+  })
+);
 
 /**
  * Middleware
  */
-app.use(expressSession({
-  store: new (require('connect-pg-simple')(expressSession))({
-    pool: db.pool,
-    createTableIfMissing: true
-  }),
-  resave: false,
-  saveUninitialized: false,
-  secret: 'gigg gigg',
-  cookie: {maxAge: 180 * 24 * 60 * 60 * 1000},
-  name: 'userSession'
-}));
+app.use(
+  expressSession({
+    store: new (require('connect-pg-simple')(expressSession))({
+      pool: db.pool,
+      createTableIfMissing: true,
+    }),
+    resave: false,
+    saveUninitialized: false,
+    secret: 'gigg gigg',
+    cookie: { maxAge: 180 * 24 * 60 * 60 * 1000, httpOnly: false },
+    name: 'userSession',
+  })
+);
 
 app.use(express.json());
 
@@ -49,17 +58,17 @@ app.use('/login', session);
 app.use((err, req, res, next) => {
   defaultError = {
     log: 'An unkown Error Occured in React MiddleWare',
-    message: 'An error occurred'
-  }
+    message: 'An error occurred',
+  };
 
   defaultError = {
     ...defaultError,
-    log: err.log
-  }
+    log: err.log,
+  };
   console.log(defaultError.log);
-  res.status(400).send(defaultError.message)
+  res.status(400).send(defaultError.message);
 });
 
 app.listen(port, () => {
-  console.log(`Example app listening on port ${port}`)
-})
+  console.log(`Example app listening on port ${port}`);
+});

@@ -1,1 +1,11 @@
 /* @import 'bootstrap/scss/bootstrap'; */
+body {
+  background-color: #999;
+  /* color: #06defd !important; */
+}
+
+button {
+  background-color: #06defd !important;
+  /* outline:1px solid #06defd;
+  border :1px solid #06defd; */
+}
